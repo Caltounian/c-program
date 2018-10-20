@@ -1,0 +1,89 @@
+// Please do not use this code for anything other than learning purposes.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+int instClass, frequency, instSum, instCpi, temp, totalCount;
+int i = 0;
+int cpi[100];
+int instCount[100];
+double mip, var, avgcpi, this;
+
+void ShowAll() {
+
+		printf("FREQUENCY (MHz): %d", frequency);
+		printf("\n \n");
+		printf("INSTRUCTION DISTRIBUTION \n \n");
+		printf("CLASS \t CPI \t COUNT \n ");
+		for(i = 0; i < instClass; i++){
+		printf("\n %d\t%d\t%d",(i+1),cpi[i],instCount[i]);
+		this += (instCount[i] * cpi[i]);
+		}
+		printf("\n \n");
+		printf("PERFORMANCE VALUES \n \n");
+		printf("AVERAGE CPI \t %.2f \n \n", var);
+		printf("TIME (ms) \t %.2f \n \n", (instSum*this)/frequency *100);
+		printf("MIPS \t \t %.2f \n \n", mip);
+}
+  
+
+double time(double x) {
+	avgcpi = x;
+	return x;
+}
+
+double mips(double x) {
+		double avgcpi = x;
+		time(avgcpi);
+		mip = frequency/avgcpi;
+		return mip;
+ }
+
+double averageCpi(double x, double y) {
+	var = x / y;
+	return mips(var);
+  }
+
+void InputNums() {
+	printf("Enter the number of instruction classes: ");
+	scanf("%d", &instClass);
+	printf("\n\n");
+	printf("Enter the frequency of the machine (MHz): ");
+	scanf("%d", &frequency);
+	printf("\n\n");
+	   for (i = 0; i < instClass; ++i) {
+			printf("Enter CPI of class %d: ", (i+1));
+			scanf("%d", &cpi[i]);
+			printf("Enter instruction count of class %d (millions): ", (i+1));
+			scanf("%d", &instCount[i]);
+			totalCount += instCount[i];
+			printf("\n\n\n");
+			instSum = (double)instSum + (double)instCount[i];
+		    temp = cpi[i] * instCount[i];
+			instCpi = instCpi + temp;
+			}
+			 averageCpi(instCpi, instSum);
+          }
+
+int main() {
+  int menuDecision;
+    while(menuDecision != 3) {
+   	 printf("\n\nPerformance Assessment \n");
+	 printf("\n 1) Enter Parameters \n 2) Print Results \n 3) Quit\n");
+	 scanf("%i", &menuDecision);
+	 printf("Enter Selection: %i  \n ", menuDecision);
+	 printf("\n \n");
+	 	if (menuDecision == 1) {
+			 InputNums();	 	
+	 	}
+	 	else if (menuDecision == 2) {
+			ShowAll();
+	 	}
+	 	
+	 	else if (menuDecision == 3) {
+	 		printf("PROGRAM TERMINATED NORMALLY \n\n\n");
+	 	}
+	 }
+}
